@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+  grafana:
+    image: {{ grafana_docker_image_name }}:{{ grafana_docker_version }}
+    env_file:
+      - ./docker-compose-env
+    ports:
+      - {{ grafana_docker_expose_port }}:3000
+    volumes:
+      - {{ grafana_docker_storage_dir }}:/var/lib/grafana/

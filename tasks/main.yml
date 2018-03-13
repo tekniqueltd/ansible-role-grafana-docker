@@ -1,0 +1,71 @@
+---
+- name: Create grafana docker user
+  user:
+    name: "{{ grafana_docker_user }}"
+    home: "{{ grafana_docker_directory }}"
+    createhome: yes
+    groups: docker
+    append: yes
+    shell: /bin/bash
+  become: yes
+  tags:
+    - grafana_docker
+
+- name: Create grafana directory
+  file:
+    path: "{{ grafana_docker_storage_dir }}"
+    state: directory
+    owner: 104
+    group: "{{ grafana_docker_user }}"
+    mode: 0755
+  become: yes
+  tags:
+    - grafana_docker
+
+- name: Pull grafana docker image
+  docker_image:
+    name: "{{ grafana_docker_image_name }}:{{ grafana_docker_version }}"
+    force: "{{ grafana_docker_pull_images|bool }}"
+  become: yes
+  become_user: "{{ grafana_docker_user }}"
+  tags:
+    - grafana_docker
+    - grafana_docker_testing
+
+- name: Template docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ grafana_docker_directory }}/docker-compose.yml"
+    mode: 0644
+  become: yes
+  become_user: "{{ grafana_docker_user }}"
+  no_log: "{{ not grafana_docker_log_sensitive }}"
+  tags:
+    - grafana_docker
+    - grafana_docker_deploy
+    - grafana_docker_testing
+
+- name: Template docker-compose-env
+  template:
+    src: docker-compose-env.j2
+    dest: "{{ grafana_docker_directory }}/docker-compose-env"
+    mode: 0644
+  become: yes
+  become_user: "{{ grafana_docker_user }}"
+  no_log: "{{ not grafana_docker_log_sensitive }}"
+  tags:
+    - grafana_docker
+    - grafana_docker_deploy
+    - grafana_docker_testing
+
+- name: Start grafana docker
+  docker_service:
+    project_src: "{{ grafana_docker_directory }}"
+    state: present
+  become: yes
+  become_user: "{{ grafana_docker_user }}"
+  register: start_grafana_docker
+  tags:
+    - grafana_docker
+    - grafana_docker_deploy
+    - grafana_docker_testing

@@ -27,9 +27,9 @@ Example Playbook
     ---
     - hosts: servers
       roles:
-         - { role: grafana-docker, 
-             grafana_docker_admin_pass: password, 
-             grafana_docker_expose_port: 3000 
+         - { role: grafana-docker,
+             grafana_docker_admin_pass: password,
+             grafana_docker_expose_port: 3000
            }
 
 
@@ -37,4 +37,3 @@ Add as a submodule to your playbook repo
 ----------------------------------------
 
     git submodule add https://github.com/teknique/ansible-role-grafana-docker.git roles/grafana-docker
-

@@ -1,0 +1,7 @@
+{% if grafana_docker_admin_pass != "" %}
+GF_SECURITY_ADMIN_PASSWORD={{ grafana_docker_admin_pass }}
+{% endif %}
+GF_USERS_ALLOW_SIGN_UP={{ grafana_docker_allow_signup|default(false, true) }}
+{% if grafana_docker_install_plugins != "" %}
+GF_INSTALL_PLUGINS={{ grafana_docker_install_plugins|join(',') }}
+{% endif %}

@@ -1,0 +1,12 @@
+---
+grafana_docker_image_name: grafana/grafana
+grafana_docker_version: latest
+grafana_docker_pull_images: yes
+grafana_docker_user: grafana
+grafana_docker_log_sensitive: yes
+grafana_docker_directory: /srv/grafana-docker
+grafana_docker_storage_dir: "{{ grafana_docker_directory }}/grafana-storage"
+grafana_docker_expose_port: 3000
+grafana_docker_allow_signup: ""
+grafana_docker_admin_pass: password
+grafana_docker_install_plugins: []
