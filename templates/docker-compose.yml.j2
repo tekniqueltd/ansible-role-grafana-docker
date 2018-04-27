@@ -6,5 +6,6 @@ services:
       - ./docker-compose-env
     ports:
       - {{ grafana_docker_expose_port }}:3000
+    user: "472"
     volumes:
       - {{ grafana_docker_storage_dir }}:/var/lib/grafana/

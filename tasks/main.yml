@@ -7,6 +7,7 @@
     groups: docker
     append: yes
     shell: /bin/bash
+    uid: 472
   become: yes
   tags:
     - grafana_docker
@@ -15,7 +16,7 @@
   file:
     path: "{{ grafana_docker_storage_dir }}"
     state: directory
-    owner: 104
+    owner: "{{ grafana_docker_user }}"
     group: "{{ grafana_docker_user }}"
     mode: 0755
   become: yes
