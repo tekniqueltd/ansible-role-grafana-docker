@@ -1,4 +1,9 @@
 version: '2.2'
+networks:
+  default:
+    name: grafana
+    driver: bridge
+
 services:
   grafana:
     image: {{ grafana_docker_image_name }}:{{ grafana_docker_version }}
@@ -9,3 +14,5 @@ services:
     user: "472"
     volumes:
       - {{ grafana_docker_storage_dir }}:/var/lib/grafana/
+    networks:
+      - default

@@ -5,3 +5,7 @@ GF_USERS_ALLOW_SIGN_UP={{ grafana_docker_allow_signup|default(false, true) }}
 {% if grafana_docker_install_plugins != "" %}
 GF_INSTALL_PLUGINS={{ grafana_docker_install_plugins|join(',') }}
 {% endif %}
+{% if grafana_docker_reverse_proxy|bool %}
+GF_SERVER_DOMAIN={{ grafana_docker_server_domain }}
+GF_SERVER_ROOT_URL={{ grafana_docker_server_root_url }}
+{% endif %}
