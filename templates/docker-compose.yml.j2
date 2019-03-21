@@ -6,6 +6,7 @@ networks:
 
 services:
   grafana:
+    container_name: {{ grafana_docker_container_name }}
     image: {{ grafana_docker_image_name }}:{{ grafana_docker_version }}
     env_file:
       - ./docker-compose-env
