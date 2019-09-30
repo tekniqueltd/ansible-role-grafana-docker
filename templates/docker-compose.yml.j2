@@ -17,3 +17,4 @@ services:
       - {{ grafana_docker_storage_dir }}:/var/lib/grafana/
     networks:
       - default
+    restart: always
