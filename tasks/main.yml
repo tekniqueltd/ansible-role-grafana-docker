@@ -60,7 +60,7 @@
     - grafana_docker_testing
 
 - name: Start grafana docker
-  docker_service:
+  docker_compose:
     project_src: "{{ grafana_docker_directory }}"
     state: present
   become: yes
