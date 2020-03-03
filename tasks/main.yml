@@ -23,6 +23,28 @@
   tags:
     - grafana_docker
 
+- name: Create grafana dashboard directory
+  file:
+    path: "{{ grafana_docker_dashboard_dir }}"
+    state: directory
+    owner: "{{ grafana_docker_user }}"
+    group: "{{ grafana_docker_user }}"
+    mode: 0755
+  become: yes
+  tags:
+    - grafana_docker
+
+- name: Create grafana datasource directory
+  file:
+    path: "{{ grafana_docker_datasource_dir }}"
+    state: directory
+    owner: "{{ grafana_docker_user }}"
+    group: "{{ grafana_docker_user }}"
+    mode: 0755
+  become: yes
+  tags:
+    - grafana_docker
+
 - name: Pull grafana docker image
   docker_image:
     name: "{{ grafana_docker_image_name }}:{{ grafana_docker_version }}"

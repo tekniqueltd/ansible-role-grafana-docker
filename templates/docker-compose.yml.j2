@@ -15,6 +15,8 @@ services:
     user: "472"
     volumes:
       - {{ grafana_docker_storage_dir }}:/var/lib/grafana/
+      - {{ grafana_docker_dashboard_dir }}:/etc/grafana/provisioning/dashboards/
+      - {{ grafana_docker_datasource_dir }}:/etc/grafana/provisioning/datasources/
     networks:
       - default
     restart: always
